@@ -12,9 +12,6 @@ inputs:
   input:
     description: 'Input settings to read or write files, can be specific value or file path. (Possible representation types: "Json" or "Yaml".)'
     required: true
-outputs:
-  result:
-    description: 'Action result.'
 runs:
   using: 'node12'
   main: 'dist/index.js'
