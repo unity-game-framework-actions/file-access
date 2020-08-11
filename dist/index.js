@@ -3777,8 +3777,7 @@ function get(input) {
         const keys = Object.keys(input);
         for (const key of keys) {
             const property = input[key];
-            const output = yield getProperty(key, property.input, property.path);
-            core.setOutput(key, output);
+            yield getProperty(key, property.input, property.path);
         }
     });
 }
@@ -3787,8 +3786,7 @@ function set(input) {
         const keys = Object.keys(input);
         for (const key of keys) {
             const property = input[key];
-            const output = yield setProperty(key, property.input, property.path, property.value);
-            core.setOutput(key, output);
+            yield setProperty(key, property.input, property.path, property.value);
         }
     });
 }
@@ -3797,7 +3795,7 @@ function getProperty(name, input, path) {
         const data = yield utility.getDataAny(input);
         const value = utility.getValue(data.data, path);
         const result = utility.format(value, data.type);
-        return result;
+        core.setOutput(name, result);
     });
 }
 function setProperty(name, input, path, value) {
@@ -3805,7 +3803,8 @@ function setProperty(name, input, path, value) {
         const data = yield utility.getDataAny(input);
         utility.setValue(data, path, value);
         const result = utility.format(data, data.type);
-        return result;
+        core.setOutput(name, result);
+        yield utility.writeData(path, data, data.type);
     });
 }
 

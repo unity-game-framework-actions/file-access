@@ -16,9 +16,8 @@ async function get(input: any): Promise<void> {
 
   for (const key of keys) {
     const property = input[key]
-    const output = await getProperty(key, property.input, property.path)
 
-    core.setOutput(key, output)
+    await getProperty(key, property.input, property.path)
   }
 }
 
@@ -27,26 +26,27 @@ async function set(input: any): Promise<void> {
 
   for (const key of keys) {
     const property = input[key]
-    const output = await setProperty(key, property.input, property.path, property.value)
 
-    core.setOutput(key, output)
+    await setProperty(key, property.input, property.path, property.value)
   }
 }
 
-async function getProperty(name: string, input: string, path: string): Promise<string> {
+async function getProperty(name: string, input: string, path: string): Promise<void> {
   const data = await utility.getDataAny(input)
   const value = utility.getValue(data.data, path)
   const result = utility.format(value, data.type)
 
-  return result
+  core.setOutput(name, result)
 }
 
-async function setProperty(name: string, input: string, path: string, value: string): Promise<string> {
+async function setProperty(name: string, input: string, path: string, value: string): Promise<void> {
   const data = await utility.getDataAny(input)
 
   utility.setValue(data, path, value)
 
   const result = utility.format(data, data.type)
 
-  return result
+  core.setOutput(name, result)
+
+  await utility.writeData(path, data, data.type)
 }
