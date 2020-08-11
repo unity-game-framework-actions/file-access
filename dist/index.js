@@ -9993,7 +9993,7 @@ exports.write = write;
 function format(value, type) {
     switch (type) {
         case 'json':
-            return JSON.stringify(value, null, 2);
+            return JSON.stringify(value, null, 2).trim();
         case 'yaml':
             return yaml.dump(value);
         default:
