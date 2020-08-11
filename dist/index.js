@@ -3801,10 +3801,13 @@ function getProperty(name, input, path) {
 function setProperty(name, input, path, value) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = yield utility.getDataAny(input);
-        utility.setValue(data, path, value);
-        const result = utility.format(data, data.type);
+        const valueData = utility.parseAny(value);
+        utility.setValue(data.data, path, valueData.result);
+        const result = utility.format(data.data, data.type);
         core.setOutput(name, result);
-        yield utility.writeData(path, data, data.type);
+        if (yield utility.exists(input)) {
+            yield utility.writeData(input, data.data, data.type);
+        }
     });
 }
 
