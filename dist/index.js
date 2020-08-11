@@ -3786,7 +3786,12 @@ function set(input) {
         const keys = Object.keys(input);
         for (const key of keys) {
             const property = input[key];
-            yield setProperty(key, property.input, property.path, property.value);
+            try {
+                yield setProperty(key, property.input, property.path, property.value);
+            }
+            catch (error) {
+                core.warning(`Set property failed: name:'${key}', error:'${error}'.`);
+            }
         }
     });
 }

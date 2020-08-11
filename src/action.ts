@@ -27,7 +27,11 @@ async function set(input: any): Promise<void> {
   for (const key of keys) {
     const property = input[key]
 
-    await setProperty(key, property.input, property.path, property.value)
+    try {
+      await setProperty(key, property.input, property.path, property.value)
+    } catch (error) {
+      core.warning(`Set property failed: name:'${key}', error:'${error}'.`)
+    }
   }
 }
 
