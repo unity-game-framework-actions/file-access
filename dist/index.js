@@ -9995,7 +9995,7 @@ function format(value, type) {
         case 'json':
             return JSON.stringify(value, null, 2).trim();
         case 'yaml':
-            return yaml.dump(value);
+            return yaml.dump(value).trim();
         default:
             throw `Invalid format type: '${type}'.`;
     }
