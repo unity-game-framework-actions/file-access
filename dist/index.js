@@ -3763,8 +3763,12 @@ const core = __importStar(__webpack_require__(840));
 const utility = __importStar(__webpack_require__(880));
 function processAccess(input) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield get(input.get);
-        yield set(input.set);
+        if (input.hasOwnProperty('get')) {
+            yield get(input.get);
+        }
+        if (input.hasOwnProperty('set')) {
+            yield set(input.set);
+        }
     });
 }
 exports.processAccess = processAccess;

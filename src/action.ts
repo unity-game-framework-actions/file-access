@@ -2,8 +2,13 @@ import * as core from '@actions/core'
 import * as utility from './utility'
 
 export async function processAccess(input: any): Promise<void> {
-  await get(input.get)
-  await set(input.set)
+  if (input.hasOwnProperty('get')) {
+    await get(input.get)
+  }
+
+  if (input.hasOwnProperty('set')) {
+    await set(input.set)
+  }
 }
 
 async function get(input: any): Promise<void> {
