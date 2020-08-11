@@ -1,5 +1,5 @@
-name: 'Draft'
-description: 'No description.'
+name: 'File Access'
+description: 'Read or update file.'
 inputs:
   token:
     description: 'GitHub token used by action.'
