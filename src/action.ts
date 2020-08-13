@@ -34,9 +34,14 @@ async function set(input: any): Promise<void> {
 async function getProperty(name: string, input: string, path: string): Promise<void> {
   const data = await utility.getDataAny(input)
   const value = utility.getValue(data.data, path)
-  const result = utility.format(value, data.type)
 
-  core.setOutput(name, result)
+  if (typeof value === 'object') {
+    const result = utility.format(value, data.type)
+
+    core.setOutput(name, result)
+  } else {
+    core.setOutput(name, value)
+  }
 }
 
 async function setProperty(name: string, input: string, path: string, value: string): Promise<void> {

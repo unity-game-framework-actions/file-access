@@ -3794,8 +3794,13 @@ function getProperty(name, input, path) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = yield utility.getDataAny(input);
         const value = utility.getValue(data.data, path);
-        const result = utility.format(value, data.type);
-        core.setOutput(name, result);
+        if (typeof value === 'object') {
+            const result = utility.format(value, data.type);
+            core.setOutput(name, result);
+        }
+        else {
+            core.setOutput(name, value);
+        }
     });
 }
 function setProperty(name, input, path, value) {
