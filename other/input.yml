@@ -1,0 +1,10 @@
+input:
+  get:
+    name:
+      input: value or path
+      path: property path
+  set:
+    name:
+      input: value or path
+      path: property path
+      value: value

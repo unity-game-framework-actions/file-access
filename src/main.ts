@@ -1,12 +1,14 @@
 import * as core from '@actions/core'
-import * as github from '@actions/github'
 import * as utility from './utility'
+import * as action from './action'
 
 run()
 
 async function run(): Promise<void> {
   try {
-    console.log('This is a draft action.')
+    const input = await utility.getInputAny()
+
+    await action.processAccess(input)
   } catch (error) {
     core.setFailed(error.message)
   }

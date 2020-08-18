@@ -85,9 +85,9 @@ export async function write(path: string, value: string): Promise<void> {
 export function format(value: any, type: string): string {
   switch (type) {
     case 'json':
-      return JSON.stringify(value, null, 2)
+      return JSON.stringify(value, null, 2).trim()
     case 'yaml':
-      return yaml.dump(value)
+      return yaml.dump(value).trim()
     default:
       throw `Invalid format type: '${type}'.`
   }
