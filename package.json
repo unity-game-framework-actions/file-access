@@ -1,6 +1,6 @@
 {
   "name": "file-access",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "displayName": "File Access",
   "description": "Read or update file.",
   "main": "lib/main.js",
